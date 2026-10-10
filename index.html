@@ -1,1 +1,267 @@
-<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>LovingLetter.com</title><style>body{margin:0;font-family:Segoe UI,sans-serif;background:linear-gradient(135deg,#ffd6e5,#f7e7a9,#dceeff);min-height:100vh} .container{max-width:1000px;margin:auto;padding:30px}.hero{text-align:center;padding:40px}.card{background:white;border-radius:20px;padding:20px;margin:20px 0;box-shadow:0 4px 12px rgba(0,0,0,.1)} input,textarea,select{width:100%;padding:12px;margin-top:10px;border-radius:10px;border:1px solid #ddd}.stickers{font-size:35px;display:flex;flex-wrap:wrap;gap:10px}.letter{padding:20px;border-radius:15px;margin-top:20px}.btn{background:#ff6fa5;color:white;border:none;padding:12px 20px;border-radius:12px;cursor:pointer}</style></head><body><div class="container"><div class="hero"><h1>💌 LovingLetter.com</h1><p>Write what your heart wants to say.</p></div><div class="card"><h2>Recipient Name</h2><input id="name" placeholder="Enter your loved one's name"></div><div class="card"><h2>Choose Letter Theme</h2><select id="theme"><option value="#F7E7A9">Butter Yellow</option><option value="#DCEEFF">Baby Blue</option><option value="#FFD6E5">Blush Pink</option><option value="#E7D8FF">Lavender</option><option value="#B08968">Vintage Brown</option><option value="#FFFFFF">Classic White</option></select></div><div class="card"><h2>Cute Stickers</h2><div class="stickers">🧸 🎀 🌸 💕 ⭐ 🦋 🌙 ☁️ 💌 ☕ 📖 🐻</div></div><div class="card"><h2>Your Letter</h2><textarea id="msg" rows="8" placeholder="Tell them everything you feel..."></textarea><br><br><button class="btn" onclick="generateLetter()">Create Letter</button><div id="output"></div></div></div><script>function generateLetter(){let n=document.getElementById('name').value||'My Favorite Person';let m=document.getElementById('msg').value;let c=document.getElementById('theme').value;document.getElementById('output').innerHTML=`<div class='letter' style='background:${c}'><h2>Dear ${n},</h2><p>${m}</p><p><b>With Love ❤️</b></p></div>`;}</script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Loving Letter 💌</title>
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: Georgia, serif;
+  background: linear-gradient(135deg, #fbe4df, #f8d4e5);
+  color: #593746;
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 700px;
+  margin: 35px auto;
+  padding: 24px;
+}
+
+h1, h2 { text-align: center; }
+
+.subtitle {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+label {
+  display: block;
+  margin: 16px 0 7px;
+  font-weight: bold;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 13px;
+  border: 1px solid #e7b9cd;
+  border-radius: 9px;
+  background: #fffaf8;
+  font: 16px Georgia, serif;
+}
+
+textarea {
+  min-height: 150px;
+  resize: vertical;
+}
+
+button {
+  border: none;
+  border-radius: 25px;
+  padding: 12px 20px;
+  margin: 8px 5px 0 0;
+  background: #d94e88;
+  color: white;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+button:hover { background: #b93870; }
+
+.center { text-align: center; }
+
+#letterPage { display: none; }
+
+.letter {
+  position: relative;
+  margin: 35px auto 25px;
+  padding: 48px 28px 35px;
+  max-width: 600px;
+  background: #fff4d9;
+  color: #604333;
+  box-shadow: 0 12px 28px #a66d7540;
+  border: 1px solid #e4c89a;
+  line-height: 1.9;
+  overflow-wrap: anywhere;
+}
+
+.letter::before, .letter::after {
+  content: "";
+  position: absolute;
+  left: -9px;
+  right: -9px;
+  height: 17px;
+  border-radius: 8px;
+  background: linear-gradient(
+    to bottom, #b9824e, #e4bd80, #996338
+  );
+  box-shadow: 0 3px 5px #65402140;
+}
+
+.letter::before { top: 8px; }
+.letter::after { bottom: 8px; }
+
+.letter h2 {
+  font-family: cursive;
+  color: #a44e68;
+  font-size: 27px;
+}
+
+.message {
+  white-space: pre-wrap;
+  min-height: 90px;
+  margin: 25px 0;
+  font-size: 17px;
+}
+
+.signature {
+  text-align: right;
+  font-family: cursive;
+  font-size: 20px;
+  margin-top: 30px;
+}
+
+.heart {
+  text-align: center;
+  font-size: 22px;
+  color: #c84d77;
+}
+
+@media (max-width: 480px) {
+  .container { margin: 12px auto; padding: 15px; }
+  .letter { padding: 43px 20px 32px; }
+}
+</style>
+</head>
+
+<body>
+<main class="container">
+
+  <section id="formPage">
+    <h1>💌 Loving Letter</h1>
+    <p class="subtitle">
+      Some feelings deserve more than a message.
+      Put them into a letter.
+    </p>
+
+    <form id="letterForm">
+      <label for="to">To whom are you writing?</label>
+      <input id="to" placeholder="Their name" required>
+
+      <label for="from">Your name</label>
+      <input id="from" placeholder="Your name" required>
+
+      <label for="message">Your letter</label>
+      <textarea id="message"
+        placeholder="Write everything you want to say..."
+        required></textarea>
+
+      <div class="center">
+        <button type="submit">Create My Letter 💌</button>
+      </div>
+    </form>
+  </section>
+
+  <section id="letterPage">
+    <h1>Your letter is ready 💗</h1>
+
+    <article class="letter" id="letter">
+      <h2>Dear <span id="recipient"></span>,</h2>
+      <div class="message" id="letterMessage"></div>
+      <p>With love,</p>
+      <div class="signature" id="sender"></div>
+      <div class="heart">♥</div>
+    </article>
+
+    <div class="center">
+      <button id="shareBtn">Share Letter ↗</button>
+      <button id="whatsappBtn">Share on WhatsApp</button>
+      <button id="copyBtn">Copy Letter</button>
+      <button id="backBtn">Write Another Letter</button>
+    </div>
+  </section>
+
+</main>
+
+<script>
+const form = document.getElementById("letterForm");
+const formPage = document.getElementById("formPage");
+const letterPage = document.getElementById("letterPage");
+
+function getLetterText() {
+  return `Dear ${document.getElementById("recipient").textContent},
+
+${document.getElementById("letterMessage").textContent}
+
+With love,
+${document.getElementById("sender").textContent}`;
+}
+
+form.addEventListener("submit", function(event) {
+  event.preventDefault();
+
+  document.getElementById("recipient").textContent =
+    document.getElementById("to").value.trim();
+
+  document.getElementById("sender").textContent =
+    document.getElementById("from").value.trim();
+
+  document.getElementById("letterMessage").textContent =
+    document.getElementById("message").value.trim();
+
+  formPage.style.display = "none";
+  letterPage.style.display = "block";
+  window.scrollTo(0, 0);
+});
+
+document.getElementById("backBtn").addEventListener("click", function() {
+  letterPage.style.display = "none";
+  formPage.style.display = "block";
+  window.scrollTo(0, 0);
+});
+
+document.getElementById("shareBtn").addEventListener("click", async function() {
+  const text = getLetterText();
+  const url = window.location.href;
+
+  if (navigator.share) {
+    try {
+      await navigator.share({
+        title: "A letter for you 💌",
+        text: text,
+        url: url
+      });
+    } catch (error) {
+      if (error.name !== "AbortError") {
+        window.open(
+          "https://wa.me/?text=" +
+          encodeURIComponent(text + "\n\nMake your own letter: " + url),
+          "_blank"
+        );
+      }
+    }
+  } else {
+    window.open(
+      "https://wa.me/?text=" +
+      encodeURIComponent(text + "\n\nMake your own letter: " + url),
+      "_blank"
+    );
+  }
+});
+
+document.getElementById("whatsappBtn").addEventListener("click", function() {
+  const text = getLetterText();
+  const url = window.location.href;
+
+  window.open(
+    "https://wa.me/?text=" +
+    encodeURIComponent(text + "\n\nMake your own letter: " + url),
+    "_blank"
+  );
+});
+
+document.getElementById("copyBtn").addEventListener("click", async function() {
+  try {
+    await navigator.clipboard.writeText(getLetterText());
+    alert("Your letter has been copied!");
+  } catch (error) {
+    alert("Copy is unavailable here. Please select and copy the letter manually.");
+  }
+});
+</script>
+</body>
+</html>
